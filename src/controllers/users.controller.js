@@ -20,5 +20,49 @@ export class UsersController{
         } catch (error) {
             res.json({status:"error", message:error.message});
         }
+    }
+    
+    static getAllUsers = async (req, res) => {
+          try {
+            // Lógica para obtener todos los usuarios con datos básicos
+            const users = await UserService.getAllUsers();
+            // Envía la respuesta al cliente
+            res.json(users);
+          } catch (error) {
+            // Manejo de errores
+            console.error(error);
+            res.status(500).json({ error: 'Error al obtener usuarios' });
+          }
+        }
+
+    static deleteInactiveUsers = async (req, res) => {
+        try {
+            const inactiveThreshold = new Date();
+            // Configura la fecha límite para la inactividad (en este caso, 30 minutos atrás)
+            inactiveThreshold.setMinutes(inactiveThreshold.getMinutes() - 30);
+
+            // Obtiene usuarios inactivos
+            const inactiveUsers = await UserService.getInactiveUsers(inactiveThreshold);
+
+            // Elimina usuarios inactivos
+            const deletedUsers = await Promise.all(
+                inactiveUsers.map(async user => {
+                    // Envía correo electrónico al usuario antes de eliminarlo
+                    // sendEmail(user.email, 'Tu cuenta ha sido eliminada por inactividad');
+                    return await UserService.deleteUser(user._id);
+                })
+            );
+
+            // Envía la respuesta al cliente
+            res.json({
+                status: "success",
+                message: `Usuarios inactivos eliminados correctamente`,
+                deletedUsers,
+            });
+        } catch (error) {
+            // Manejo de errores
+            console.error(error);
+            res.json({ status: "error", message: error.message });
+        }
     };
 }

@@ -17,6 +17,7 @@ import { cartsRouters } from "./routes/carts.routes.js";
 import { homeRouters } from "./routes/home.routes.js";
 import { sessionRouter } from "./routes/sessions.routes.js";
 import { usersRouter } from "./routes/users.routes.js";
+import {adminRoutes} from "./routes/admin.routes.js"
 import { initializePassport } from "./config/passportConfig.js"
 import { generateUser } from "./utils/helpers.js";
 import { addLogger } from "./helpers/logger.js";
@@ -76,6 +77,9 @@ app.use("/",sessionRouter);
 
 //endpoint para acceder a la documentacion de la api
 app.use("/docs",swaggerUI.serve,swaggerUI.setup(swaggerSpecs));
+
+// Usar las rutas de administrador
+app.use('/admin', adminRoutes);
 
 //traer productos faker
 app.get("/mockingpoducts", (req,res)=>{
