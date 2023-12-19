@@ -48,5 +48,10 @@ router.get("/:uid", (req,res)=>{
 //cambiar rol de usuarios
 router.post("/premium/:uid", checkRole(["admin"]), UsersController.modifyRole);
 
+// Ruta para obtener todos los usuarios
+router.get('/getusers', UsersController.getAllUsers);
+
+// Ruta para eliminar usuarios inactivos
+router.delete('/', UsersController.deleteInactiveUsers);
 
 export {router as usersRouter};

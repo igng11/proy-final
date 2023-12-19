@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+</head>
+<body>
+
+  <h1>Lista de Usuarios</h1>
+
+  {{#if users.length}}
+    <ul>
+      {{#each users}}
+        <li>
+          <strong>{{this.name}}</strong>
+          <p>Email: {{this.email}}</p>
+          <p>Rol: {{this.role}}</p>
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>No hay usuarios disponibles.</p>
+  {{/if}}
+
+</body>
+</html>

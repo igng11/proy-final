@@ -17,7 +17,7 @@ export class ProductManagerMongo {
     async getWithPaginate(query, options){
         try {
             const result = await this.model.paginate(query, options);
-            console.debug("result: ",result);
+            // console.debug("result: ",result);
             return result;
         } catch (error) {
             throw error;

@@ -54,4 +54,34 @@ export class UsersMongo{
             throw error;
         }
     };
+
+    async getInactiveUsers(inactiveThreshold) {
+        try {
+            // Lógica para obtener usuarios inactivos
+            return await this.model.find({ lastConnection: { $lt: inactiveThreshold } });
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async deleteUser(userId) {
+        try {
+            // Lógica para eliminar un usuario
+            return await this.model.findByIdAndDelete(userId);
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    static getAllUsers = async () => {
+        try {
+          // Lógica para obtener todos los usuarios desde la base de datos
+          const users = await usersModel.find();
+          return users;
+        } catch (error) {
+          // Manejo de errores
+          console.error(error);
+          throw new Error('Error al obtener usuarios en UserDao');
+        }
+      };
 }
