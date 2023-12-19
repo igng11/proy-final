@@ -28,7 +28,7 @@ export class UserService{
     static getAllUsers = async () => {
         try {
           // Lógica para obtener todos los usuarios
-          const users = await usersModel.find(); // Asegúrate de tener el método correspondiente en tu userDao
+          const users = await usersModel.find(); 
           return users;
         } catch (error) {
           // Manejo de errores
