@@ -1,8 +1,14 @@
 import { Router } from "express";
 import { PagesController } from "../controllers/pages.controller.js";
+import { UsersController } from "../controllers/users.controller.js";
 
 const router = Router();
 
+// Ruta para obtener todos los usuarios
+router.get('/getusers', UsersController.getAllUsers);
+
+// Ruta para eliminar usuarios inactivos
+router.delete('/deleteusers', UsersController.deleteInactiveUsers);
 
 router.get("/home", PagesController.renderHome);
 

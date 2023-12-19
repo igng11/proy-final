@@ -49,7 +49,7 @@ router.get("/:uid", (req,res)=>{
 router.post("/premium/:uid", checkRole(["admin"]), UsersController.modifyRole);
 
 // Ruta para obtener todos los usuarios
-router.get('/', UsersController.getAllUsers);
+router.get('/getusers', UsersController.getAllUsers);
 
 // Ruta para eliminar usuarios inactivos
 router.delete('/', UsersController.deleteInactiveUsers);

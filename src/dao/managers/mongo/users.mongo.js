@@ -72,4 +72,16 @@ export class UsersMongo{
             throw error;
         }
     };
+
+    static getAllUsers = async () => {
+        try {
+          // Lógica para obtener todos los usuarios desde la base de datos
+          const users = await usersModel.find();
+          return users;
+        } catch (error) {
+          // Manejo de errores
+          console.error(error);
+          throw new Error('Error al obtener usuarios en UserDao');
+        }
+      };
 }
